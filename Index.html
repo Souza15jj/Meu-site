@@ -1,0 +1,136 @@
+<!DOCTYPE html><html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DarkTools Pro</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(145deg, #0f0f0f, #1a1a1a);
+      color: white;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      overflow: hidden;
+    }h1 {
+  font-size: 2.5rem;
+  color: #00ff88;
+  margin-bottom: 20px;
+}
+
+.login-box {
+  background-color: #111;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 0 25px rgba(0, 255, 136, 0.4);
+  animation: fadeIn 1.5s ease-out;
+}
+
+input[type="password"] {
+  padding: 10px;
+  width: 250px;
+  border: none;
+  border-radius: 6px;
+  margin-bottom: 10px;
+  background-color: #222;
+  color: white;
+  font-size: 1rem;
+}
+
+button {
+  padding: 10px 20px;
+  background-color: #00ff88;
+  border: none;
+  border-radius: 6px;
+  font-size: 1rem;
+  color: #111;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+button:hover {
+  background-color: #00cc6e;
+}
+
+#main-content {
+  display: none;
+  animation: fadeIn 1s ease-out forwards;
+  text-align: center;
+}
+
+#anuncio-box {
+  margin-top: 20px;
+  background: #222;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 0 20px rgba(0, 255, 136, 0.2);
+  display: none;
+}
+
+#ganhos {
+  margin-top: 15px;
+  font-size: 1.2rem;
+  color: #00ff88;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+  </style>
+</head>
+<body>  <div class="login-box" id="login-box">
+    <h1>DarkTools Pro</h1>
+    <input type="password" id="password" placeholder="Digite a senha">
+    <button onclick="checkPassword()">Entrar</button>
+  </div>  <div id="main-content">
+    <h1>Bem-vindo ao seu site privado!</h1>
+    <p>Aqui estão suas ferramentas secretas para lucrar.</p>
+    <button onclick="mostrarAnuncio()">Gerar anúncio e ganhar</button><div id="anuncio-box">
+  <p>Exibindo anúncio... aguarde <span id="contador">5</span> segundos</p>
+</div>
+
+<div id="ganhos"></div>
+
+  </div>  <script>
+    const senhaCorreta = "123456"; // você pode mudar isso depois
+    let ganhos = 0;
+
+    function checkPassword() {
+      const senha = document.getElementById("password").value;
+      if (senha === senhaCorreta) {
+        document.getElementById("login-box").style.display = "none";
+        document.getElementById("main-content").style.display = "block";
+      } else {
+        alert("Senha incorreta!");
+      }
+    }
+
+    function mostrarAnuncio() {
+      const anuncioBox = document.getElementById("anuncio-box");
+      const contador = document.getElementById("contador");
+      const ganhosDiv = document.getElementById("ganhos");
+
+      anuncioBox.style.display = "block";
+      ganhosDiv.innerHTML = "";
+
+      let tempo = 5;
+      contador.innerText = tempo;
+
+      const intervalo = setInterval(() => {
+        tempo--;
+        contador.innerText = tempo;
+        if (tempo <= 0) {
+          clearInterval(intervalo);
+          anuncioBox.style.display = "none";
+          ganhos += 0.05;
+          ganhosDiv.innerHTML = `Você ganhou R$ ${ganhos.toFixed(2)}`;
+        }
+      }, 1000);
+    }
+  </script></body>
+</html>
